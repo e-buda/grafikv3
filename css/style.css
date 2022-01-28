@@ -1,0 +1,102 @@
+body {
+  @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+  background-color: #bbb;
+  font-family: "Open Sans", sans-serif;
+}
+body main {
+  display: flex;
+  justify-content: center;
+}
+body main .container {
+  padding-top: 25px;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+body main .container h1 {
+  font-size: 40px;
+  width: 100%;
+  text-align: center;
+}
+body main .container a {
+  all: unset;
+  cursor: pointer;
+}
+body main .container .gray {
+  color: #757474;
+}
+body main .container .locked {
+  color: #870029;
+}
+body main .container .unlocked {
+  color: #008787;
+}
+body main .container .box {
+  text-align: center;
+  margin: 10px;
+  min-height: 50px;
+  min-width: 50px;
+  background-color: #eee;
+  border-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 25px;
+  justify-content: center;
+}
+body main .container .box i {
+  text-align: center;
+  font-size: 60px;
+}
+body main .container .box .calendar {
+  width: 100%;
+  font-size: 20px;
+}
+body main .container .box .calendar .mc {
+  text-align: center;
+  width: 100%;
+  font-size: 35px;
+  margin-bottom: 20px;
+}
+body main .container .box .calendar .day {
+  cursor: pointer;
+}
+body main .container .box .calendar table {
+  width: 100%;
+}
+body main .container .box .calendar table td, body main .container .box .calendar table th {
+  border: black solid 1px;
+  padding: 10px;
+  text-align: center;
+}
+body main .container .box .calendar table th {
+  min-width: 10px;
+  width: 10%;
+}
+body main .container .calBox {
+  width: 80%;
+}
+body main .container .small-width {
+  width: 75px;
+}
+body main .container .medium-width {
+  width: 150px;
+}
+body main .container .big-width {
+  width: 300px;
+}
+body main .container .small-height {
+  height: 75px;
+}
+body main .container .medium-height {
+  height: 150px;
+}
+body main .container .big-height {
+  height: 300px;
+}
+
+/*# sourceMappingURL=style.css.map */

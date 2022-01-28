@@ -1,0 +1,124 @@
+body {
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+  background-color: #bbb;
+  font-family: 'Open Sans', sans-serif;
+
+  main {
+    display: flex;
+    justify-content: center;
+
+    .container {
+      padding-top: 25px;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      align-content: center;
+      width: 90%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+
+      h1 {
+        font-size: 40px;
+        width: 100%;
+        text-align: center;
+      }
+
+      a {
+        all: unset;
+        cursor: pointer;
+      }
+
+      .gray {
+        color: #757474;
+      }
+
+      .locked {
+        color: #870029;
+      }
+
+      .unlocked {
+        color: #008787;
+      }
+
+      .box {
+        i {
+          text-align: center;
+          font-size: 60px;
+        }
+
+        text-align: center;
+        margin: 10px;
+        min-height: 50px;
+        min-width: 50px;
+        background-color: #eee;
+        border-radius: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 25px;
+        justify-content: center;
+
+        .calendar {
+
+          width: 100%;
+          font-size: 20px;
+
+          .mc {
+            text-align: center;
+            width: 100%;
+            font-size: 35px;
+            margin-bottom: 20px;
+          }
+
+          .day {
+            cursor: pointer;
+          }
+
+          table {
+            width: 100%;
+
+            td, th {
+              border: black solid 1px;
+              padding: 10px;
+              text-align: center;
+            }
+
+            th {
+              min-width: 10px;
+              width: 10%;
+            }
+          }
+        }
+      }
+
+      .calBox {
+        width: 80%;
+      }
+
+      .small-width {
+        width: 75px;
+      }
+
+      .medium-width {
+        width: 150px;
+      }
+
+      .big-width {
+        width: 300px;
+      }
+
+      .small-height {
+        height: 75px;
+      }
+
+      .medium-height {
+        height: 150px;
+      }
+
+      .big-height {
+        height: 300px;
+      }
+    }
+  }
+
+}
