@@ -19,9 +19,17 @@
         <div class="box small-width small-height"><i class="bi bi-calendar-week"></i>
             <p>Kalendarz</p></div>
         </a>
-        <a href="calendar.php">
-            <div class="box small-width small-height"><i class="bi bi-file-earmark-arrow-down"></i>
-                <p>Data Export</p></div>
+        <a href="pdfData.php">
+            <div class="box small-width small-height"><i class="bi bi-file-earmark-pdf"></i>
+                <p>Export PDF</p></div>
+        </a>
+        <a href="excelData.php">
+            <div class="box small-width small-height"><i class="bi bi-file-earmark-spreadsheet"></i>
+                <p>Export Excel</p></div>
+        </a>
+        <a href="logout.php">
+            <div class="box small-width small-height"><i class="bi bi-door-open"></i>
+                <p>Wyloguj się</p></div>
         </a>
     </div>
 </main>

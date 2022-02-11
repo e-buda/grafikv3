@@ -90,7 +90,45 @@ body {
           }
         }
       }
-
+      .daysOptions{
+        width: 80%;
+        h3{
+          font-size: 25px;
+          b{
+            font-weight: bold;
+          }
+        }
+        .container{
+          display: flex;
+          .option{
+            cursor: pointer;
+            margin: 10px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 100px;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            .color{
+              height: 100%;
+              width: 80px;
+              border-radius: 10px;
+              margin: 0px 5px;
+            }
+            p{
+              font-size: 24px;
+            }
+          }
+          .active{
+            background-color:#63ff63;
+          }
+          .remover{
+            background-color: #ea4e8f;
+          }
+        }
+      }
       .calBox {
         width: 80%;
       }
