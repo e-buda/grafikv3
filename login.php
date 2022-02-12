@@ -79,7 +79,7 @@ if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
                         }
                         $conn->close();
                     } else {
-                        echo 'Braki w danych';
+                        echo '<p>Braki w danych</p>';
                     }
                 }
                 ?>
