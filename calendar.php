@@ -1,4 +1,11 @@
 <?php
+session_start();
+if (!isset($_SESSION['logged']) || $_SESSION['logged'] != true) {
+    header("Location: login.php");
+    exit;
+}
+?>
+<?php
 if (!$_GET) {
     header("Location: calendar.php?month=" . date("m") . "&year=" . date("Y"));
     exit;
@@ -20,6 +27,7 @@ if (!is_numeric($_GET['month']) || !is_numeric($_GET['year']) || $_GET['month'] 
     require_once "functions.php";
     links();
     ?>
+    <script src="./js/cal.js"></script>
 </head>
 <body>
 <main>

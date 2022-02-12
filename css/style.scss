@@ -18,6 +18,12 @@ body {
       display: flex;
       flex-wrap: wrap;
 
+      hr {
+        width: 100%;
+        color: rgba(0, 0, 0, 0);
+        border: none;
+      }
+
       h1 {
         font-size: 40px;
         width: 100%;
@@ -90,20 +96,25 @@ body {
           }
         }
       }
-      .daysOptions{
+
+      .daysOptions {
         width: 80%;
-        h3{
+
+        h3 {
           font-size: 25px;
-          b{
+
+          b {
             font-weight: bold;
           }
         }
-        .container{
+
+        .container {
           display: flex;
-          .option{
+
+          .option {
             cursor: pointer;
             margin: 10px;
-            display:flex;
+            display: flex;
             justify-content: center;
             align-items: center;
             min-width: 100px;
@@ -111,24 +122,72 @@ body {
             background-color: #fff;
             border-radius: 10px;
             padding: 10px;
-            .color{
+
+            .color {
               height: 100%;
               width: 80px;
               border-radius: 10px;
               margin: 0px 5px;
             }
-            p{
+
+            p {
               font-size: 24px;
             }
           }
-          .active{
-            background-color:#63ff63;
+
+          .active {
+            background-color: #63ff63;
           }
-          .remover{
+
+          .remover {
             background-color: #ea4e8f;
           }
         }
       }
+
+      .logRegBox {
+        width: 50%;
+        text-align: center;
+
+        form {
+          display: flex;
+          flex-direction: row-reverse;
+          flex-wrap: wrap;
+          margin-top: 20px;
+          width: 80%;
+          max-width: 500px;
+          input,select,#passPowerBox {
+            all: unset;
+            padding: 10px;
+            margin: 5px 2px;
+            width: 100%;
+            text-align: left;
+            background-color: #fff;
+          }
+          a,p{
+            align-items: center;
+            align-self: center;
+            margin: 20px 5px 5px;
+          }
+          p{
+            color: #ff0000;
+          }
+          a{
+            text-decoration: underline;
+          }
+          input[type=submit] {
+            background-color: white;
+            width: auto;
+            margin-top:20px;
+            font-size: 20px;
+          }
+          #passPowerBox{
+            display: none;
+            text-align: center;
+          }
+        }
+      }
+
       .calBox {
         width: 80%;
       }

@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['logged']) || $_SESSION['logged'] != true) {
+    header("Location: login.php");
+    exit;
+}
+?>
 <!doctype html>
 <html lang="pl">
 <head>
@@ -14,7 +21,7 @@
 <body>
 <main>
     <div class="container">
-        <h1>Witaj, USER</h1>
+        <h1>Witaj, <?php echo $_SESSION['imie'] ?></h1>
         <a href="calendar.php">
         <div class="box small-width small-height"><i class="bi bi-calendar-week"></i>
             <p>Kalendarz</p></div>
@@ -27,6 +34,7 @@
             <div class="box small-width small-height"><i class="bi bi-file-earmark-spreadsheet"></i>
                 <p>Export Excel</p></div>
         </a>
+        <hr>
         <a href="logout.php">
             <div class="box small-width small-height"><i class="bi bi-door-open"></i>
                 <p>Wyloguj się</p></div>
