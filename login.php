@@ -20,6 +20,9 @@ if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
 </head>
 <body>
 <main>
+    <noscript>
+        <h2>Włącz JavaScript aby używać aplikacji e-grafik</h2>
+    </noscript>
     <div class="container">
         <div class="box logRegBox">
             <h1>Zaloguj się</h1>

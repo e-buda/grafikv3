@@ -7,6 +7,53 @@ body main {
   display: flex;
   justify-content: center;
 }
+body main noscript {
+  position: absolute;
+  z-index: 2;
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+body main noscript h2 {
+  color: #ffffff;
+  font-size: 50px;
+}
+body main #loadingBox {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.01);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+body main #loadingBox h2 {
+  font-size: 45px;
+  color: #6c6c6c;
+}
+body main .notificationBox {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+body main .notificationBox .notification {
+  background-color: rgba(255, 255, 255, 0.53);
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+}
+body main .notificationBox .notification b {
+  font-weight: bold;
+}
+body main .notificationBox .notification .close {
+  margin-left: 10px;
+}
 body main .container {
   padding-top: 25px;
   justify-content: center;

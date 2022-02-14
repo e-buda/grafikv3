@@ -20,6 +20,9 @@ if (!isset($_SESSION['logged']) || $_SESSION['logged'] != true) {
 </head>
 <body>
 <main>
+    <noscript>
+        <h2>Włącz JavaScript aby używać aplikacji e-grafik</h2>
+    </noscript>
     <div class="container">
         <h1>Witaj, <?php echo $_SESSION['imie'] ?></h1>
         <a href="calendar.php">
