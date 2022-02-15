@@ -1,3 +1,3 @@
 <?php
-$resp = array('ok'=>false,'errors' =>[array('inf'=>'blocked', 'isGroup'=>true, 'lockedBy'=>['',''], 'name'=>'')]);
+$resp = array('ok'=>true,'errors' =>[array('inf'=>'blocked', 'isGroup'=>true, 'lockedBy'=>['abc','xyz'], 'name'=>'')]);
 echo json_encode($resp);

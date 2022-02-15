@@ -144,10 +144,10 @@ function setForActualDay(id) {
                                 }
                             }
                             if(json.errors[j].isGroup){
-                                notification("Grupa <b>" + json.errors[j].name + "</b> na Dzień <b>" + mainDay + "." + month + "." + year + "</b> zajęta przez: <b>" + txt + "</b>", "rgba(255,128,128)", 4000, true)
+                                notification("Grupa <b>" + json.errors[j].name + "</b> na Dzień <b>" + mainDay + "." + month + "." + year + "</b> zajęta przez: <b>" + lockedBy + "</b>", "rgba(255,128,128)", 4000, true)
                             }
                             else {
-                                notification("Zmiana <b>" + json.errors[j].name + "</b> na Dzień <b>" + mainDay + "." + month + "." + year + "</b> zajęta przez: <b>" + txt + "</b>", "rgba(255,128,128)", 4000, true)
+                                notification("Zmiana <b>" + json.errors[j].name + "</b> na Dzień <b>" + mainDay + "." + month + "." + year + "</b> zajęta przez: <b>" + lockedBy + "</b>", "rgba(255,128,128)", 4000, true)
                             }
                         }
                     }
