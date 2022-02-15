@@ -45,6 +45,7 @@ body main .notificationBox {
 body main .notificationBox .notification {
   background-color: rgba(255, 255, 255, 0.53);
   margin: 20px;
+  width: auto;
   padding: 10px;
   border-radius: 10px;
 }
@@ -52,7 +53,11 @@ body main .notificationBox .notification b {
   font-weight: bold;
 }
 body main .notificationBox .notification .close {
+  position: relative;
+  top: 0;
+  left: 0;
   margin-left: 10px;
+  float: right;
 }
 body main .container {
   padding-top: 25px;

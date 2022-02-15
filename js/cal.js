@@ -81,13 +81,12 @@ function init() {
 }
 
 function setForActualDay(id) {
-
-    if (actualActive !== -1) {
-        document.getElementById(actualActive).classList.remove("active");
-        outStyle(document.getElementById(actualActive))
-    }
     var remover = id === -1;
     if (remover) {
+        if (actualActive !== -1) {
+            document.getElementById(actualActive).classList.remove("active");
+            outStyle(document.getElementById(actualActive))
+        }
         for (var x = 0; x < data.length; x++) {
             if (data[x].day === mainDay) {
                 arrayRemove(data, x)
@@ -98,7 +97,12 @@ function setForActualDay(id) {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
-                if (this.responseText === "OK") {
+                var json = JSON.parse(this.responseText);
+                if (json.ok === true) {
+                    if (actualActive !== -1) {
+                        document.getElementById(actualActive).classList.remove("active");
+                        outStyle(document.getElementById(actualActive))
+                    }
                     var isExist = false;
                     for (var x = 0; x < data.length; x++) {
                         if (data[x].day === mainDay) {
@@ -127,9 +131,21 @@ function setForActualDay(id) {
 
                     }
                 } else {
-                    for(var i = 0; i < types.length; i++){
-                        if(types[i].id===id){
-                            notification("Zmiana <b>"+types[i].name+"</b> na Dzień <b>" + mainDay + "." + month + "." + year + "</b> zajęta przez: <b>" + this.responseText+"</b>", "rgba(255,128,128)", 10000,false)
+                    if(!json.isBlocked){
+                        notification(json.error, "rgba(255,128,128)", 5000, true)
+                    }
+                    else {
+                        for (var i = 0; i < types.length; i++) {
+                            if (types[i].id === id) {
+                                var txt = ""
+                                for(var z = 0; z < json.blockedBy.length; z++){
+                                    txt += json.blockedBy[z];
+                                    if(z !== json.blockedBy.length-1){
+                                        txt += ", ";
+                                    }
+                                }
+                                notification("Zmiana <b>" + types[i].name + "</b> na Dzień <b>" + mainDay + "." + month + "." + year + "</b> zajęta przez: <b>" + txt + "</b>", "rgba(255,128,128)", 4000, true)
+                            }
                         }
                     }
 
