@@ -131,23 +131,27 @@ function setForActualDay(id) {
 
                     }
                 } else {
-                    if(!json.isBlocked){
-                        notification(json.error, "rgba(255,128,128)", 5000, true)
-                    }
-                    else {
-                        for (var i = 0; i < types.length; i++) {
-                            if (types[i].id === id) {
-                                var txt = ""
-                                for(var z = 0; z < json.blockedBy.length; z++){
-                                    txt += json.blockedBy[z];
-                                    if(z !== json.blockedBy.length-1){
-                                        txt += ", ";
-                                    }
+                    for(var j = 0; j < json.errors.length; j++){
+                        if(json.errors[j].inf!=="blocked"){
+                            notification(json.errors[j].inf, "rgba(255,128,128)", 5000, true)
+                        }
+                        else {
+                            var lockedBy = ""
+                            for(var z = 0; z < json.errors[j].lockedBy.length; z++){
+                                lockedBy += json.errors[j].lockedBy[z]
+                                if(z !== json.errors[j].lockedBy.length-1){
+                                    lockedBy += ", "
                                 }
-                                notification("Zmiana <b>" + types[i].name + "</b> na Dzień <b>" + mainDay + "." + month + "." + year + "</b> zajęta przez: <b>" + txt + "</b>", "rgba(255,128,128)", 4000, true)
+                            }
+                            if(json.errors[j].isGroup){
+                                notification("Grupa <b>" + json.errors[j].name + "</b> na Dzień <b>" + mainDay + "." + month + "." + year + "</b> zajęta przez: <b>" + txt + "</b>", "rgba(255,128,128)", 4000, true)
+                            }
+                            else {
+                                notification("Zmiana <b>" + json.errors[j].name + "</b> na Dzień <b>" + mainDay + "." + month + "." + year + "</b> zajęta przez: <b>" + txt + "</b>", "rgba(255,128,128)", 4000, true)
                             }
                         }
                     }
+
 
                 }
 

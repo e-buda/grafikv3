@@ -1,3 +1,3 @@
 <?php
-$resp = array('ok'=>false,'error'=>'Brak Uprawnień','blockedBy'=>['Magda Gessler','Robert Makłowicz'], 'isBlocked'=>true);
+$resp = array('ok'=>false,'errors' =>[array('inf'=>'blocked', 'isGroup'=>true, 'lockedBy'=>['',''], 'name'=>'')]);
 echo json_encode($resp);
