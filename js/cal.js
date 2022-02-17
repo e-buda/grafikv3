@@ -1,3 +1,8 @@
+mainDay = -1;
+takt = true;
+background = "rgba(0,0,0,0)"
+actualActive = -1
+
 function overStyle(object, color) {
     if (!editable()) {
         return;
@@ -15,11 +20,6 @@ function outStyle(object) {
     }
     object.style.backgroundColor = 'white';
 }
-
-mainDay = -1;
-takt = true;
-background = "rgba(0,0,0,0)"
-actualActive = -1
 
 function choseDay(day) {
     if (editable) {
@@ -62,7 +62,7 @@ function init() {
                 document.getElementById('day' + mainDay).style.backgroundColor = background
             }
 
-        }, 500)
+        }, 400)
     } else {
         document.getElementById("remover").style.display = "none";
         document.getElementById("fullDaySelectorInf").innerText = "Edycja Jest niemożliwa";
@@ -73,6 +73,7 @@ function init() {
     for (var x = 0; x < data.length; x++) {
         for (var y = 0; y < types.length; y++) {
             if (types[y].id === data[x].type) {
+                document.getElementById('day' + data[x].day+"TypeName").innerHTML = types[y].name;
                 document.getElementById('day' + data[x].day).style.backgroundColor = types[y].color;
             }
         }
@@ -83,6 +84,7 @@ function init() {
 function setForActualDay(id) {
     var remover = id === -1;
     if (remover) {
+        document.getElementById('day' + mainDay+"TypeName").innerHTML = "";
         if (actualActive !== -1) {
             document.getElementById(actualActive).classList.remove("active");
             outStyle(document.getElementById(actualActive))
@@ -110,6 +112,7 @@ function setForActualDay(id) {
                             isExist = true
                             for (var y = 0; y < types.length; y++) {
                                 if (types[y].id === id) {
+                                    document.getElementById('day' + mainDay+"TypeName").innerHTML = types[y].name;
                                     background = types[y].color
                                     actualActive = "selectOption" + id;
                                     document.getElementById(actualActive).classList.add("active");
@@ -122,6 +125,7 @@ function setForActualDay(id) {
                         data.push({"day": mainDay, "type": id})
                         for (var x = 0; x < types.length; x++) {
                             if (types[x].id === id) {
+                                document.getElementById('day' + mainDay+"TypeName").innerHTML = types[x].name;
                                 background = types[x].color
                                 actualActive = "selectOption" + id;
                                 document.getElementById(actualActive).classList.add("active");
@@ -130,6 +134,7 @@ function setForActualDay(id) {
                         }
 
                     }
+                    notification("Zapisano","rgba(128,255,129,0.5)",2000,true);
                 } else {
                     for(var j = 0; j < json.errors.length; j++){
                         if(json.errors[j].inf!=="blocked"){
@@ -157,10 +162,8 @@ function setForActualDay(id) {
 
             }
         }
-        xmlhttp.open("GET", "isAvalible.php?day=" + mainDay + "&month=" + month + "&year=" + year + "&type=" + id, true);
+        xmlhttp.open("GET", "saveDay.php?day=" + mainDay + "&month=" + month + "&year=" + year + "&type=" + id, true);
         xmlhttp.send();
-
-
     }
 }
 

@@ -122,6 +122,10 @@ body main .container .box .calendar .mc {
 body main .container .box .calendar .day {
   cursor: pointer;
 }
+body main .container .box .calendar .day p {
+  font-size: 12px;
+  height: 15px;
+}
 body main .container .box .calendar table {
   width: 100%;
 }

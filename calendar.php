@@ -4,10 +4,27 @@ if (!isset($_SESSION['logged']) || $_SESSION['logged'] != true) {
     header("Location: login.php");
     exit;
 }
-?>
-<?php
+require "calFunctions.php";
 if (!$_GET) {
-    header("Location: calendar.php?month=" . date("m") . "&year=" . date("Y"));
+    $year = date("Y");
+    $month = date("m");
+    if($month==12){
+        $month = 1;
+        $year++;
+    }
+    else{
+        $month++;
+    }
+    if(!checkLock($month,$year,false)){
+        if($month==12){
+            $month = 1;
+            $year++;
+        }
+        else{
+            $month++;
+        }
+    }
+    header("Location: calendar.php?month=" . $month . "&year=" . $year);
     exit;
 }
 if (!is_numeric($_GET['month']) || !is_numeric($_GET['year']) || $_GET['month'] > 12 || $_GET['month'] < 1) {
@@ -80,61 +97,9 @@ if (!is_numeric($_GET['month']) || !is_numeric($_GET['year']) || $_GET['month'] 
             </div>
         </a>
         <?php
-        require_once "config.php";
-        $conn = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
-        if ($conn->connect_error) {
-            die('Błąd odczytu danych');
-        }
-        $_edit = true;
-        $dzienBlokady = 1;
-        $conn->query("set names utf8;");
-        $sql = "SELECT date as dataBlokady FROM blokada WHERE month=" . $month . " AND year=" . $year;
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $dzienBlokady = strtotime($row['dataBlokady']);
-                date_default_timezone_set('Europe/Warsaw');
-                $date = strtotime(date('Y-m-d'));
-                $_edit = !($dzienBlokady < $date);
-                //echo "Blokada: <strong>" . date('d', $dzienBlokady) . "-" . date('m', $dzienBlokady) . "-" . date('Y', $dzienBlokady) . "</strong>";
-            }
-        } else {
-            $monthA = $_monthPrevius;
-            $yearA = $_yearPrevius;
-            $dayBlokady = 20;
-            $ostatni = strtotime($dayBlokady . "-" . $monthA . "-" . $yearA);
-            $dzienSlowo = date('l', $ostatni);
-            switch (substr($dzienSlowo, 0, 3)) {
-                case "Mon":
-                    $blank = 3;
-                    break;
-                case "Tue":
-                    $blank = 4;
-                    break;
-                case "Wed":
-                    $blank = 5;
-                    break;
-                case "Thu":
-                    $blank = 6;
-                    break;
-                case "Fri":
-                    $blank = 0;
-                    break;
-                case "Sat":
-                    $blank = 1;
-                    break;
-                case "Sun":
-                    $blank = 2;
-                    break;
-            }
-            $dayBlokady -= $blank;
-            $dzienBlokady = strtotime($dayBlokady . "-" . $monthA . "-" . $yearA);
-            date_default_timezone_set('Europe/Warsaw');
-            $date = strtotime(date('Y-m-d'));
-            $_edit = !($dzienBlokady < $date);
-            //echo "Blokada: <strong>" . date('d', $dzienBlokady) . "-" . date('m', $dzienBlokady) . "-" . date('Y', $dzienBlokady) . "</strong>";
-        }
-        $conn->close();
+        $lockRes = checkLock($_GET['month'],$_GET['year'],true);
+        $_edit= $lockRes[1];
+        $dzienBlokady = $lockRes[0];
         if (!$_edit) {
             echo '
             <div class="box small-width small-height locked">
@@ -199,7 +164,7 @@ if (!is_numeric($_GET['month']) || !is_numeric($_GET['year']) || $_GET['month'] 
                         }
                         if ($x >= $firstDayOfWeek && $x < $firstDayOfWeek + $daysCount) {
                             echo "<td class='day' id='day" . (($x - $firstDayOfWeek) + 1) . "' onclick='choseDay(" . (($x - $firstDayOfWeek) + 1) . ")'>";
-                            echo ($x - $firstDayOfWeek) + 1;
+                            echo (($x - $firstDayOfWeek) + 1)."<p id='day" . (($x - $firstDayOfWeek) + 1) . "TypeName'> </p>";
                         } else {
                             echo "<td>";
                         }
@@ -227,10 +192,10 @@ if (!is_numeric($_GET['month']) || !is_numeric($_GET['year']) || $_GET['month'] 
                     <p>Wyczyść</p>
                 </div>
                 <?php
-                require_once "config.php";
+                require "config.php";
                 $conn = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
                 if ($conn->connect_error) {
-                    die('Błąd odczytu danych' . $conn->connect_error);
+                    die('Błąd odczytu danych ' . $conn->connect_error);
                 }
                 $conn->query("set names utf8;");
                 $sql = "SELECT s1.etykieta as etykieta, s1.id as id, s1.kolor as kolor from typyDni as s1 LEFT JOIN uprawnieniaDniDlaGrup as s2 on s1.id = s2.typDnia WHERE s2.grupa = " . $_SESSION['grupaZawodowa'];
@@ -274,9 +239,6 @@ if (!is_numeric($_GET['month']) || !is_numeric($_GET['year']) || $_GET['month'] 
         echo 'types=[]\n';
     }
     $conn->close();
-
-    ?>
-    <?php
 
     require_once "config.php";
     $conn = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
