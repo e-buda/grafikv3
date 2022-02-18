@@ -19,7 +19,61 @@ else {
                     $sql = "SELECT * FROM uprawnieniaDniDlaGrup uprawnienia LEFT JOIN typyDni typy ON uprawnienia.typDnia = typy.id  WHERE typy.id=".$_GET['type']." AND uprawnienia.grupa=".$_SESSION['grupaZawodowa']." AND typy.disabled=0";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
+                        $maxVal = -1;
+                        $maxGroupVal = -1;
+                        $sql = "SELECT IFNULL((SELECT val FROM maxVal WHERE userGroup = 3 AND type = 1), -1) val";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $maxVal = $row['val'];
+                            }
+                        }
+                        $sql = "SELECT IFNULL((SELECT maxValsGroups.val FROM typyDni INNER JOIN maxValsGroups ON typyDni.maxValGroup = maxValsGroups.id WHERE typyDni.id = ".$_GET['type']." AND maxValsGroups.userGroup = ".$_SESSION['grupaZawodowa']."),-1) val;";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $maxGroupVal = $row['val'];
+                            }
+                        }
                         $resp['ok'] = true;
+                        if($maxVal != -1){
+                            $sql = "SELECT typyDni.etykieta AS name, users.name AS firstName, users.surname AS LastName FROM daneDni INNER JOIN users ON users.id = daneDni.user INNER JOIN typyDni ON typyDni.id = daneDni.typeDay INNER JOIN maxVal ON users.grupaZawodowa = maxVal.userGroup AND daneDni.typeDay = maxVal.type WHERE date = '".$_GET['year']."-".$_GET['month']."-".$_GET['day']."' AND daneDni.typeDay = ".$_GET['type']." AND users.grupaZawodowa = ".$_SESSION['grupaZawodowa'];
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                                $resp['ok'] = false;
+                                $lockedBy = [];
+                                $name = "";
+                                while ($row = $result->fetch_assoc()) {
+                                    $maxGroupVal = $row['val'];
+                                    $lockedBy[] = $row['firstName']." ".$row['LastName'];
+                                    $name = $row['name'];
+
+                                }
+                                 $resp['errors'][] = array('inf'=>'blocked', 'lockedBy'=>$lockedBy,'isGroup'=>false,'name'=>$name);
+                            }
+                        }
+                        if( $maxGroupVal != -1){
+                            $sql = "SELECT maxValsGroups.name AS name, users.name AS firstName, users.surname AS LastName FROM daneDni INNER JOIN typyDni ON typyDni.id = daneDni.typeDay INNER JOIN users ON users.id = daneDni.user INNER JOIN maxValsGroups ON maxValsGroups.id = typyDni.maxValGroup AND users.grupaZawodowa = maxValsGroups.userGroup WHERE date = '".$_GET['year']."-".$_GET['month']."-".$_GET['day']."' AND users.grupaZawodowa = ".$_SESSION['grupaZawodowa']." AND(SELECT maxValGroup FROM typyDni INNER JOIN maxValsGroups ON typyDni.maxValGroup = maxValsGroups.id AND maxValsGroups.userGroup = ".$_SESSION['grupaZawodowa']." WHERE typyDni.id = ".$_GET['type'].") = maxValsGroups.id;";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                                $resp['ok'] = false;
+                                $lockedBy = [];
+                                $name = "";
+                                while ($row = $result->fetch_assoc()) {
+                                    $maxGroupVal = $row['val'];
+                                    $lockedBy[] = $row['firstName']." ".$row['LastName'];
+                                    $name = $row['name'];
+
+                                }
+                                $resp['errors'][] = array('inf'=>'blocked', 'lockedBy'=>$lockedBy,'isGroup'=>true, 'name'=> $name);
+                            }
+                        }
+                        if($resp['ok']){
+                            if(!$conn->query("INSERT INTO daneDni (user, typeDay, date) VALUES (".$_SESSION['id'].",".$_GET['type'].",'".$_GET['year']."-".$_GET['month']."-".$_GET['day']."') ")){
+                                $resp['errors'][] = array('inf' =>"Błąd zapisu");
+                                $resp['ok'] = false;
+                            }
+                        }
                     }
                     else{
                         $resp['errors'][] = array('inf' =>"Nieodpowiednia Zmiana");
