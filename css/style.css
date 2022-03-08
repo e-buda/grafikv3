@@ -80,6 +80,11 @@ body main .container h1 {
   width: 100%;
   text-align: center;
 }
+body main .container h3 {
+  font-size: 30px;
+  width: 100%;
+  text-align: center;
+}
 body main .container a {
   all: unset;
   cursor: pointer;
@@ -108,6 +113,22 @@ body main .container .box {
 body main .container .box i {
   text-align: center;
   font-size: 60px;
+}
+body main .container .box .table1 {
+  font-size: 20px;
+}
+body main .container .box .table1 tr {
+  background-color: #d2d2d2;
+}
+body main .container .box .table1 tr th {
+  font-size: 35px;
+  background-color: #e7e7e7;
+}
+body main .container .box .table1 tr:nth-child(even) {
+  background-color: #b6b6b6;
+}
+body main .container .box .table1 tr td, body main .container .box .table1 tr th {
+  padding: 10px;
 }
 body main .container .box .calendar {
   width: 100%;
@@ -218,7 +239,7 @@ body main .container .logRegBox form #passPowerBox {
   display: none;
   text-align: center;
 }
-body main .container .calBox {
+body main .container .mainBox {
   width: 80%;
 }
 body main .container .small-width {

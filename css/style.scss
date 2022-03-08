@@ -4,7 +4,7 @@ body {
   font-family: 'Open Sans', sans-serif;
 
   main {
-    noscript{
+    noscript {
       position: absolute;
       z-index: 2;
       background-color: #000;
@@ -14,50 +14,59 @@ body {
       justify-content: center;
       align-items: center;
       align-content: center;
-      h2{
+
+      h2 {
         color: #ffffff;
         font-size: 50px;
       }
     }
-    #loadingBox{
+
+    #loadingBox {
       position: absolute;
       z-index: 1;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.01);
+      background-color: rgba(0, 0, 0, 0.01);
       display: flex;
       justify-content: center;
       align-items: center;
       align-content: center;
-      h2{
+
+      h2 {
         font-size: 45px;
-          color: #6c6c6c;
+        color: #6c6c6c;
       }
     }
+
     display: flex;
     justify-content: center;
-    .notificationBox{
+
+    .notificationBox {
       position: absolute;
       bottom: 0;
       right: 0;
-      .notification{
+
+      .notification {
         background-color: rgba(255, 255, 255, 0.53);
         margin: 20px;
         width: auto;
         padding: 10px;
         border-radius: 10px;
-        b{
+
+        b {
           font-weight: bold;
         }
-        .close{
+
+        .close {
           position: relative;
-          top:0;
+          top: 0;
           left: 0;
           margin-left: 10px;
           float: right;
         }
       }
     }
+
     .container {
       padding-top: 25px;
       justify-content: center;
@@ -77,6 +86,12 @@ body {
 
       h1 {
         font-size: 40px;
+        width: 100%;
+        text-align: center;
+      }
+
+      h3 {
+        font-size: 30px;
         width: 100%;
         text-align: center;
       }
@@ -115,6 +130,24 @@ body {
         padding: 25px;
         justify-content: center;
 
+        .table1 {
+          font-size: 20px;
+          tr{
+            th{
+              font-size: 35px;
+              background-color: #e7e7e7;
+            }
+            background-color: #d2d2d2;
+            &:nth-child(even) {
+              background-color: #b6b6b6;
+            }
+            td,th{
+              padding: 10px;
+            }
+          }
+
+        }
+
         .calendar {
 
           width: 100%;
@@ -129,7 +162,8 @@ body {
 
           .day {
             cursor: pointer;
-            p{
+
+            p {
               font-size: 12px;
               height: 15px;
             }
@@ -151,6 +185,7 @@ body {
           }
         }
       }
+
       .daysOptions {
         width: 80%;
 
@@ -210,7 +245,8 @@ body {
           margin-top: 20px;
           width: 80%;
           max-width: 500px;
-          input,select,#passPowerBox {
+
+          input, select, #passPowerBox {
             all: unset;
             padding: 10px;
             margin: 5px 2px;
@@ -218,31 +254,36 @@ body {
             text-align: left;
             background-color: #fff;
           }
-          a,p{
+
+          a, p {
             align-items: center;
             align-self: center;
             margin: 20px 5px 5px;
           }
-          p{
+
+          p {
             color: #ff0000;
           }
-          a{
+
+          a {
             text-decoration: underline;
           }
+
           input[type=submit] {
             background-color: white;
             width: auto;
-            margin-top:20px;
+            margin-top: 20px;
             font-size: 20px;
           }
-          #passPowerBox{
+
+          #passPowerBox {
             display: none;
             text-align: center;
           }
         }
       }
 
-      .calBox {
+      .mainBox {
         width: 80%;
       }
 

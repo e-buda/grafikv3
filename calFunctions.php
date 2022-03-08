@@ -16,7 +16,7 @@ function checkLock($month,$year,$withData)
     $edit = true;
     $dzienBlokady = 1;
     $conn->query("set names utf8;");
-    $sql = "SELECT date as dataBlokady FROM blokada WHERE month=" . $month . " AND year=" . $year;
+    $sql = "SELECT date as dataBlokady FROM blokada WHERE month=" . $month . " AND year=" . $year." ORDER BY id DESC LIMIT 1";
     $result = $conn->query($sql);
     $conn->close();
     if ($result->num_rows > 0) {

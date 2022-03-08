@@ -8,19 +8,17 @@ require "calFunctions.php";
 if (!$_GET) {
     $year = date("Y");
     $month = date("m");
-    if($month==12){
+    if ($month == 12) {
         $month = 1;
         $year++;
-    }
-    else{
+    } else {
         $month++;
     }
-    if(!checkLock($month,$year,false)){
-        if($month==12){
+    if (!checkLock($month, $year, false)) {
+        if ($month == 12) {
             $month = 1;
             $year++;
-        }
-        else{
+        } else {
             $month++;
         }
     }
@@ -55,67 +53,40 @@ if (!is_numeric($_GET['month']) || !is_numeric($_GET['year']) || $_GET['month'] 
         <h2>Ładowanie...</h2>
     </div>
     <div class="notificationBox" id="notification">
-
     </div>
     <div class="container">
-        <a href="index.php">
-            <div class="box small-width small-height">
-                <i class="bi bi-house-door"></i>
-                Strona Główna
-            </div>
-        </a>
-        <a href="<?php
+        <?php
         if ($_GET['month'] == 1) {
             $_monthPrevius = 12;
             $_yearPrevius = $_GET['year'] - 1;
-            echo "calendar.php?month=12&year=" . ($_GET['year'] - 1);
         } else {
             $_monthPrevius = $_GET['month'] - 1;
             $_yearPrevius = $_GET['year'];
-            echo "calendar.php?year=" . $_GET['year'] . "&month=" . ($_GET['month'] - 1);
         }
-        ?>">
-            <div class="box small-width small-height">
-                <i class="bi bi-arrow-left"></i>
-                <p>Poprzedni</p>
-            </div>
-        </a>
-        <a href="<?php
         if ($_GET['month'] == 12) {
             $_monthNext = 1;
             $_yearNext = $_GET['year'] + 1;
-            echo "calendar.php?month=1&year=" . ($_GET['year'] + 1);
         } else {
-            $_monthNext = 1;
+            $_monthNext = $_GET['month'] +1;
             $_yearNext = $_GET['year'];
-            echo "calendar.php?year=" . $_GET['year'] . "&month=" . ($_GET['month'] + 1);
         }
-        ?>">
-            <div class="box small-width small-height">
-                <i class="bi bi-arrow-right"></i>
-                <p>Następny</p>
-            </div>
-        </a>
-        <?php
-        $lockRes = checkLock($_GET['month'],$_GET['year'],true);
-        $_edit= $lockRes[1];
+        $lockRes = checkLock($_GET['month'], $_GET['year'], true);
+        $_edit = $lockRes[1];
         $dzienBlokady = $lockRes[0];
+        $lockInfo = [];
         if (!$_edit) {
-            echo '
-            <div class="box small-width small-height locked">
-            <i class="bi bi-calendar-x"></i>
-            <p>Edycja Niemożliwa</p>
-        </div>';
+            $lockInfo = ["Edycja niemożliwa", "locked","bi bi-calendar-x"];
         } else {
-            echo '
-            <div class="box small-width small-height unlocked">
-            <i class="bi bi-calendar-check"></i>
-            <p><strong>' . date('d', $dzienBlokady) . "-" . date('m', $dzienBlokady) . "-" . date('Y', $dzienBlokady) . '</strong></p>
-        </div>';
+            $lockInfo =  ['<p><strong>' . date('d', $dzienBlokady) . "-" . date('m', $dzienBlokady) . "-" . date('Y', $dzienBlokady) . '</strong></p>',"unlocked","bi bi-calendar-check"];
         }
+        element("index.php", "Strona Główna", "bi bi-house-door");
+        element("calendar.php?month=" . $_monthPrevius . "&year=" . $_yearPrevius, "Poprzedni", "bi bi-arrow-left");
+        element("calendar.php?month=" . $_monthNext . "&year=" . $_yearNext, "Następny", "bi bi-arrow-right");
+        custom_class_element("#", $lockInfo[0], $lockInfo[2], $lockInfo[1]);
+
         ?>
 
-        <div class="box calBox">
+        <div class="box mainBox">
             <div class="calendar">
                 <p class="mc"><?php
                     $namesMonth = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
@@ -158,13 +129,15 @@ if (!is_numeric($_GET['month']) || !is_numeric($_GET['year']) || $_GET['month'] 
                     $firstDayOfWeek -= 1;
                     $lastDayOfWeek = ($daysCount + $firstDayOfWeek - 1) % 7;
                     $runs = $daysCount + ($firstDayOfWeek + 1) + (6 - ($lastDayOfWeek + 1));
-                    for ($x = 0; $x < $runs; $x++) {
+                    for ($x = 0;
+                         $x < $runs;
+                         $x++) {
                         if ($x % 7 == 0) {
                             echo "<tr>";
                         }
                         if ($x >= $firstDayOfWeek && $x < $firstDayOfWeek + $daysCount) {
                             echo "<td class='day' id='day" . (($x - $firstDayOfWeek) + 1) . "' onclick='choseDay(" . (($x - $firstDayOfWeek) + 1) . ")'>";
-                            echo (($x - $firstDayOfWeek) + 1)."<p id='day" . (($x - $firstDayOfWeek) + 1) . "TypeName'> </p>";
+                            echo (($x - $firstDayOfWeek) + 1) . "<p id='day" . (($x - $firstDayOfWeek) + 1) . "TypeName'> </p>";
                         } else {
                             echo "<td>";
                         }
@@ -202,10 +175,10 @@ if (!is_numeric($_GET['month']) || !is_numeric($_GET['year']) || $_GET['month'] 
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        echo '<div class="option" onmouseover="overStyle(this,`' . $row['kolor'] . '`)" onmouseout="outStyle(this)" id="selectOption' . $row['id'] . '" onclick="setForActualDay(' . $row['id'] . ')"><p>' . $row['etykieta'] . '</p></div>';
+                        echo ' <div class="option" onmouseover = "overStyle(this,`' . $row['kolor'] . '`)" onmouseout = "outStyle(this)" id = "selectOption' . $row['id'] . '" onclick = "setForActualDay(' . $row['id'] . ')"><p > ' . $row['etykieta'] . ' </p ></div > ';
                     }
                 } else {
-                    echo 'baza typów jest pusta<br>Skontaktoj się z administratorem systemu';
+                    echo 'baza typów jest pusta < br>Skontaktoj się z administratorem systemu';
                 }
                 $conn->close();
                 ?>
@@ -225,18 +198,19 @@ if (!is_numeric($_GET['month']) || !is_numeric($_GET['year']) || $_GET['month'] 
         die('Błąd odczytu danych' . $conn->connect_error);
     }
     $conn->query("set names utf8;");
-    $sql = "SELECT s1.etykieta as etykieta, s1.id as id, s1.kolor as kolor from typyDni as s1 LEFT JOIN uprawnieniaDniDlaGrup as s2 on s1.id = s2.typDnia WHERE s2.grupa = " . $_SESSION['grupaZawodowa'];
+    $sql = "SELECT s1.etykieta as etykieta, s1.id as id, s1.kolor as kolor from typyDni as s1 LEFT JOIN uprawnieniaDniDlaGrup as s2 on s1.id = s2.typDnia WHERE s1.disabled=0 AND s2.grupa = " . $_SESSION['grupaZawodowa'];
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
-        $print = 'const types=[';
+        $print = 'const types = [';
         while ($row = $result->fetch_assoc()) {
-            $print .= '{"id":' . $row['id'] . ',"color":"' . $row['kolor'] . '","name":"'.$row['etykieta'].'"},';
+            $print .= '{
+        "id":' . $row['id'] . ',"color":"' . $row['kolor'] . '","name":"' . $row['etykieta'] . '"},';
         }
         $print = substr($print, 0, -1);
         $print .= "]\n";
         echo $print;
     } else {
-        echo 'types=[]\n';
+        echo 'types = []\n';
     }
     $conn->close();
 
@@ -253,13 +227,14 @@ if (!is_numeric($_GET['month']) || !is_numeric($_GET['year']) || $_GET['month'] 
     if ($_GET['month'] > 0 && $_GET['month'] < 13 && $_GET['year'] > 2000 && $_GET['year'] < 2200) {
         $sql = "SELECT date,typeDay FROM daneDni WHERE date between '" . $_GET['year'] . "-" . $_GET['month'] . "-1' AND '" . $_GET['year'] . "-" . $_GET['month'] . "-" . $maxDaysInMonth[$_GET['month'] - 1] . "' AND user=" . $_SESSION['id'];
     } else {
-        $sql = "SELECT date,typeDay FROM daneDni WHERE date between '2021-01-01' AND '2021-01-01' AND user=" . $_SESSION['id'];
+        $sql = "SELECT date,typeDay FROM daneDni WHERE date between '2021 - 01 - 01' AND '2021 - 01 - 01' AND user=" . $_SESSION['id'];
     }
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
-        $print = 'var data=[';
+        $print = 'var data = [';
         while ($row = $result->fetch_assoc()) {
-            $print .= '{"day":' . explode("-", $row['date'])[2] . ',"type":' . $row['typeDay'] . '},';
+            $print .= '{
+        "day":' . explode("-", $row['date'])[2] . ',"type":' . $row['typeDay'] . '},';
         }
         $print = substr($print, 0, -1);
         $print .= "]\n";

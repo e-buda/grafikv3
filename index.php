@@ -25,23 +25,23 @@ if (!isset($_SESSION['logged']) || $_SESSION['logged'] != true) {
     </noscript>
     <div class="container">
         <h1>Witaj, <?php echo $_SESSION['imie'] ?></h1>
-        <a href="calendar.php">
-        <div class="box small-width small-height"><i class="bi bi-calendar-week"></i>
-            <p>Kalendarz</p></div>
-        </a>
-        <a href="pdfData.php">
-            <div class="box small-width small-height"><i class="bi bi-file-earmark-pdf"></i>
-                <p>Export PDF</p></div>
-        </a>
-        <a href="excelData.php">
-            <div class="box small-width small-height"><i class="bi bi-file-earmark-spreadsheet"></i>
-                <p>Export Excel</p></div>
-        </a>
-        <hr>
-        <a href="logout.php">
-            <div class="box small-width small-height"><i class="bi bi-door-open"></i>
-                <p>Wyloguj się</p></div>
-        </a>
+        <?php
+        element("calendar.php", "Kalendarz", "bi bi-calendar-week");
+        element("pdfData.php", "Export PDF", "bi bi-file-earmark-pdf");
+        element("excelData.php", "Export Excel", "bi bi-file-earmark-spreadsheet");
+        echo "<hr>";
+        element("logout.php", "Wyloguj się", "bi bi-door-open");
+        element("dataEdition.php", "Edycja danych", "bi bi-sliders");
+        if($_SESSION['isAdmin']) {
+            echo '<hr><h3>Ustawienia Aplikacji</h3>';
+            element("daysTypes.php", "Typy dni", "bi bi-list-check");
+            element("daysLimits.php", "Ograniczenia Wpisów", "bi bi-x-octagon");
+            element("usersManagement.php", "Zarządzanie Użytkownikami", "bi bi-person-plus");
+            element("logOfLogins.php", "Dziennik Logowań", "bi bi-list-columns-reverse");
+            element("calendarLocks.php", "Blokady kalendarza", "bi bi-calendar-x");
+            element("worksGroups.php", "Grupy Zawodowe", "bi bi-people");
+        }
+        ?>
     </div>
 </main>
 </body>
