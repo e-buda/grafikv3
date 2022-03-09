@@ -55,6 +55,7 @@ if (!is_numeric($_GET['month']) || !is_numeric($_GET['year']) || $_GET['month'] 
     <div class="notificationBox" id="notification">
     </div>
     <div class="container">
+        <h1>Kalendarz</h1>
         <?php
         if ($_GET['month'] == 1) {
             $_monthPrevius = 12;
