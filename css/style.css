@@ -117,6 +117,9 @@ body main .container .box i {
 body main .container .box .table1 {
   font-size: 20px;
 }
+body main .container .box .table1 i {
+  font-size: 22px;
+}
 body main .container .box .table1 tr {
   background-color: #d2d2d2;
 }
@@ -129,6 +132,12 @@ body main .container .box .table1 tr:nth-child(even) {
 }
 body main .container .box .table1 tr td, body main .container .box .table1 tr th {
   padding: 10px;
+}
+body main .container .box .smallTable tr th {
+  font-size: 25px;
+}
+body main .container .box h2 {
+  font-size: 20px;
 }
 body main .container .box .calendar {
   width: 100%;
@@ -242,6 +251,9 @@ body main .container .logRegBox form #passPowerBox {
 body main .container .mainBox {
   width: 80%;
 }
+body main .container .halfBox {
+  width: 40%;
+}
 body main .container .small-width {
   width: 75px;
 }
@@ -259,6 +271,9 @@ body main .container .medium-height {
 }
 body main .container .big-height {
   height: 300px;
+}
+body main .container .wrap {
+  flex-wrap: wrap;
 }
 
 /*# sourceMappingURL=style.css.map */

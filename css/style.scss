@@ -131,21 +131,41 @@ body {
         justify-content: center;
 
         .table1 {
+          i {
+            font-size: 22px;
+          }
+
           font-size: 20px;
-          tr{
-            th{
+
+          tr {
+            th {
               font-size: 35px;
               background-color: #e7e7e7;
             }
+
             background-color: #d2d2d2;
+
             &:nth-child(even) {
               background-color: #b6b6b6;
             }
-            td,th{
+
+            td, th {
               padding: 10px;
             }
           }
 
+        }
+
+        .smallTable {
+          tr {
+            th {
+              font-size: 25px;
+            }
+          }
+        }
+
+        h2 {
+          font-size: 20px;
         }
 
         .calendar {
@@ -287,6 +307,10 @@ body {
         width: 80%;
       }
 
+      .halfBox {
+        width: 40%;
+      }
+
       .small-width {
         width: 75px;
       }
@@ -309,6 +333,10 @@ body {
 
       .big-height {
         height: 300px;
+      }
+
+      .wrap {
+        flex-wrap: wrap;
       }
     }
   }

@@ -82,7 +82,7 @@ if (!is_numeric($_GET['month']) || !is_numeric($_GET['year']) || $_GET['month'] 
         element("index.php", "Strona Główna", "bi bi-house-door");
         element("calendar.php?month=" . $_monthPrevius . "&year=" . $_yearPrevius, "Poprzedni", "bi bi-arrow-left");
         element("calendar.php?month=" . $_monthNext . "&year=" . $_yearNext, "Następny", "bi bi-arrow-right");
-        custom_class_element("#", $lockInfo[0], $lockInfo[2], $lockInfo[1]);
+        elementCustomClass("#", $lockInfo[0], $lockInfo[2], $lockInfo[1]);
 
         ?>
 

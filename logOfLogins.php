@@ -34,11 +34,45 @@ if (!isset($_GET['page']) || $_GET['page'] == '') {
     <div class="container">
         <h1>Dziennik logowań</h1>
         <?php
+
+        require "config.php";
+        $conn = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
+        if ($conn->connect_error) {
+            die('Błąd odczytu danych ' . $conn->connect_error);
+        }
+        $conn->query("set names utf8;");
+        if(is_numeric($_GET['page'])){
+            $sql = "SELECT logLogowan.timestamp as timestamp,users.name as name,users.surname as surname FROM logLogowan INNER JOIN users ON users.id=logLogowan.user ORDER BY logLogowan.id DESC LIMIT ".(($_GET['page']-1)*14).",14";
+        }
+        else{
+            $sql = "SELECT logLogowan.timestamp as timestamp,users.name as name,users.surname as surname FROM logLogowan INNER JOIN users ON users.id=logLogowan.user ORDER BY logLogowan.id DESC";
+        }
+        $result = $conn->query("SELECT COUNT(*) as count FROM logLogowan");
+        $maxVal = 0;
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $maxVal=$row['count'];
+            }
+        }
+        $result = $conn->query($sql);
+        $_data = "";
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $_data .= ' <tr><td>' . $row['timestamp'] . '</td><td>' . $row['name'] . '</td><td>' . $row['surname'] . '</td></tr> ';
+            }
+        } else {
+            $_data .= 'Brak logów!';
+        }
+        $conn->close();
+
         element("index.php", "Strona Główna", "bi bi-house-door");
+        element("#","Strona ".$_GET['page']."/".ceil($maxVal/14),"bi bi-collection");
         if ($_GET['page'] > 1) {
             element("logOfLogins.php?page=" . ($_GET['page'] - 1), "Poprzedni", "bi bi-arrow-left");
         }
-        element("logOfLogins.php?page=" . ($_GET['page'] + 1), "Następny", "bi bi-arrow-right");
+        if($_GET['page']<ceil($maxVal/14)) {
+            element("logOfLogins.php?page=" . ($_GET['page'] + 1), "Następny", "bi bi-arrow-right");
+        }
         ?>
         <div class="box mainBox">
             <table class="table1">
@@ -47,31 +81,18 @@ if (!isset($_GET['page']) || $_GET['page'] == '') {
                         Data
                     </th>
                     <th>
-                        Imie
+                        Imię
                     </th>
                     <th>
                         Nazwisko
                     </th>
                 </tr>
                 <?php
-                require "config.php";
-                $conn = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
-                if ($conn->connect_error) {
-                    die('Błąd odczytu danych ' . $conn->connect_error);
-                }
-                $conn->query("set names utf8;");
-                $sql = "SELECT logLogowan.timestamp as timestamp,users.name as name,users.surname as surname FROM logLogowan INNER JOIN users ON users.id=logLogowan.user ORDER BY logLogowan.id DESC";
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo ' <tr><td>'.$row['timestamp'].'</td><td>'.$row['name'].'</td><td>'.$row['surname'].'</td></tr> ';
-                    }
-                } else {
-                    echo 'Brak logów!';
-                }
-                $conn->close();
+                echo $_data;
                 ?>
             </table>
+            <hr>
+            <p>Daty i godziny są pobierane w momencie logowania według UTC nie sterfy czasowej klienta</p>
         </div>
     </div>
 </main>
