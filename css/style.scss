@@ -2,7 +2,55 @@ body {
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
   background-color: #bbb;
   font-family: 'Open Sans', sans-serif;
+  .modal{
+    overflow: hidden;
+    z-index: 1;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.57);
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    .box{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-content: center;
+      border-radius: 10px;
+      width: 500px;
+      height: 400px;
+      padding: 10px;
+      background-color: #dddddd;
+      h2{
+        font-weight: bold;
+        font-size: 25px;
 
+      }
+      input:not([type=checkbox]), select, #passPowerBox {
+        all: unset;
+        padding: 10px;
+        margin: 5px 2px;
+        width: 80%;
+        text-align: left;
+        background-color: #fff;
+      }
+      button{
+        all: unset;
+        background-color: rgba(255, 255, 255, 0.32);
+        width: auto;
+        padding: 10px;
+        margin: 20px 5px 5px;
+        font-size: 15px;
+        justify-self: flex-end;
+      }
+      .main{
+        font-size: 20px;
+        background-color: rgba(176, 255, 176, 0.75);
+      }
+    }
+  }
   main {
     noscript {
       position: absolute;
@@ -20,7 +68,6 @@ body {
         font-size: 50px;
       }
     }
-
     #loadingBox {
       position: absolute;
       z-index: 1;
@@ -45,7 +92,7 @@ body {
       position: absolute;
       bottom: 0;
       right: 0;
-
+      z-index: 5;
       .notification {
         background-color: rgba(255, 255, 255, 0.53);
         margin: 20px;

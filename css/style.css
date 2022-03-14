@@ -3,6 +3,54 @@ body {
   background-color: #bbb;
   font-family: "Open Sans", sans-serif;
 }
+body .modal {
+  overflow: hidden;
+  z-index: 1;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.57);
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+body .modal .box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  border-radius: 10px;
+  width: 500px;
+  height: 400px;
+  padding: 10px;
+  background-color: #dddddd;
+}
+body .modal .box h2 {
+  font-weight: bold;
+  font-size: 25px;
+}
+body .modal .box input:not([type=checkbox]), body .modal .box select, body .modal .box #passPowerBox {
+  all: unset;
+  padding: 10px;
+  margin: 5px 2px;
+  width: 80%;
+  text-align: left;
+  background-color: #fff;
+}
+body .modal .box button {
+  all: unset;
+  background-color: rgba(255, 255, 255, 0.32);
+  width: auto;
+  padding: 10px;
+  margin: 20px 5px 5px;
+  font-size: 15px;
+  justify-self: flex-end;
+}
+body .modal .box .main {
+  font-size: 20px;
+  background-color: rgba(176, 255, 176, 0.75);
+}
 body main {
   display: flex;
   justify-content: center;
@@ -41,6 +89,7 @@ body main .notificationBox {
   position: absolute;
   bottom: 0;
   right: 0;
+  z-index: 5;
 }
 body main .notificationBox .notification {
   background-color: rgba(255, 255, 255, 0.53);

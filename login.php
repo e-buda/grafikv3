@@ -44,9 +44,9 @@ if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
                         }
                         $conn->set_charset("utf8");
                         if ($email) {
-                            $sql = "SELECT * from users WHERE mail=UNHEX('" . $loginHex . "')";
+                            $sql = "SELECT * from users WHERE isDisabled=0 AND mail=UNHEX('" . $loginHex . "')";
                         } else {
-                            $sql = "SELECT * from users WHERE user=UNHEX('" . $loginHex . "')";
+                            $sql = "SELECT * from users WHERE isDisabled=0 AND user=UNHEX('" . $loginHex . "')";
                         }
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {

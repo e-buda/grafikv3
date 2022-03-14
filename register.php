@@ -74,7 +74,7 @@
                                 $lastNameHex = bin2hex($_POST['lastName']);
                                 $loginHex = bin2hex($_POST['login']);
                                 $mailHex = bin2hex($_POST['mail']);
-                                $sql = "SELECT * FROM akceptaction WHERE user = UNHEX('" . $loginHex . "') OR mail=UNHEX('" . $mailHex . "') UNION SELECT * FROM users WHERE user = UNHEX('" . $loginHex . "') OR mail=UNHEX('" . $mailHex . "')";
+                                $sql = "SELECT * FROM akceptaction WHERE user = UNHEX('" . $loginHex . "') OR mail=UNHEX('" . $mailHex . "') UNION SELECT * FROM users WHERE isDisabled=0 AND (user = UNHEX('" . $loginHex . "') OR mail=UNHEX('" . $mailHex . "'))";
                                 $result = $conn->query($sql);
                                 if ($result->num_rows == 0) {
                                     $hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
