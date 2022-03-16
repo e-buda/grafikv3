@@ -1,5 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 body {
-  @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
   background-color: #bbb;
   font-family: "Open Sans", sans-serif;
 }
@@ -159,6 +159,36 @@ body main .container .box {
   padding: 25px;
   justify-content: center;
 }
+body main .container .box form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+body main .container .box input:not([type=checkbox]), body main .container .box select, body main .container .box #passPowerBox {
+  all: unset;
+  padding: 10px;
+  margin: 5px 2px;
+  width: 90%;
+  text-align: left;
+  background-color: #fff;
+}
+body main .container .box button, body main .container .box input[type=submit], body main .container .box input[type=reset] {
+  all: unset;
+  background-color: rgba(255, 255, 255, 0.32);
+  width: auto;
+  padding: 10px;
+  margin: 20px 5px 5px;
+  font-size: 15px;
+  justify-self: flex-end;
+}
+body main .container .box #passPowerBox {
+  display: none;
+  text-align: center;
+}
+body main .container .box .mainBtn, body main .container .box input[type=submit] {
+  font-size: 20px;
+  background-color: rgba(176, 255, 176, 0.75);
+}
 body main .container .box i {
   text-align: center;
   font-size: 60px;
@@ -187,6 +217,7 @@ body main .container .box .smallTable tr th {
 }
 body main .container .box h2 {
   font-size: 20px;
+  width: 100%;
 }
 body main .container .box .calendar {
   width: 100%;
@@ -267,14 +298,6 @@ body main .container .logRegBox form {
   margin-top: 20px;
   width: 80%;
   max-width: 500px;
-}
-body main .container .logRegBox form input, body main .container .logRegBox form select, body main .container .logRegBox form #passPowerBox {
-  all: unset;
-  padding: 10px;
-  margin: 5px 2px;
-  width: 100%;
-  text-align: left;
-  background-color: #fff;
 }
 body main .container .logRegBox form a, body main .container .logRegBox form p {
   align-items: center;

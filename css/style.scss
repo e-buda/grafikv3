@@ -1,5 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 body {
-  @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
   background-color: #bbb;
   font-family: 'Open Sans', sans-serif;
   .modal{
@@ -161,6 +161,37 @@ body {
       }
 
       .box {
+        form{
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+
+        }
+        input:not([type=checkbox]), select, #passPowerBox {
+          all: unset;
+          padding: 10px;
+          margin: 5px 2px;
+          width: 90%;
+          text-align: left;
+          background-color: #fff;
+        }
+        button, input[type=submit], input[type=reset]{
+          all: unset;
+          background-color: rgba(255, 255, 255, 0.32);
+          width: auto;
+          padding: 10px;
+          margin: 20px 5px 5px;
+          font-size: 15px;
+          justify-self: flex-end;
+        }
+        #passPowerBox {
+          display: none;
+          text-align: center;
+        }
+        .mainBtn, input[type=submit]{
+          font-size: 20px;
+          background-color: rgba(176, 255, 176, 0.75);
+        }
         i {
           text-align: center;
           font-size: 60px;
@@ -213,6 +244,7 @@ body {
 
         h2 {
           font-size: 20px;
+          width: 100%;
         }
 
         .calendar {
@@ -313,14 +345,6 @@ body {
           width: 80%;
           max-width: 500px;
 
-          input, select, #passPowerBox {
-            all: unset;
-            padding: 10px;
-            margin: 5px 2px;
-            width: 100%;
-            text-align: left;
-            background-color: #fff;
-          }
 
           a, p {
             align-items: center;

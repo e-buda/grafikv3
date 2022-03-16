@@ -23,6 +23,8 @@ if (!isset($_SESSION['logged']) || $_SESSION['logged'] != true) {
     <noscript>
         <h2>Włącz JavaScript aby używać aplikacji e-grafik</h2>
     </noscript>
+    <div class="notificationBox" id="notification">
+    </div>
     <div class="container">
         <h1>Witaj, <?php echo $_SESSION['imie'] ?></h1>
         <?php
@@ -31,7 +33,7 @@ if (!isset($_SESSION['logged']) || $_SESSION['logged'] != true) {
         element("excelData.php", "Export Excel", "bi bi-file-earmark-spreadsheet");
         echo "<hr>";
         element("logout.php", "Wyloguj się", "bi bi-door-open");
-        element("dataEdition.php", "Edycja danych", "bi bi-sliders");
+        element("dataEdition.php", "Ustawienia", "bi bi-sliders");
         if($_SESSION['isAdmin']) {
             echo '<hr><h3>Ustawienia Aplikacji</h3>';
             element("daysTypes.php", "Typy dni", "bi bi-list-check");
